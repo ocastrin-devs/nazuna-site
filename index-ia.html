@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazuna IA</title>
+    <link rel="stylesheet" href="index-ia.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="page-intro">
+        <div class="intro-text">NAZUNA IA</div>
+    </div>
+
+    <div id="main-content-wrapper">
+
+        <div class="background-container">
+            <div class="particle bubble"></div>
+            <div class="particle triangle"></div>
+            <div class="particle bubble"></div>
+            <div class="particle triangle"></div>
+            <div class="particle bubble"></div>
+        </div>
+
+        <header class="header">
+            <nav class="nav-links">
+                <a href="https://chat.whatsapp.com/J6kBrjQzL3bGxTQCoyWOq0?mode=wwt" target="_blank">Grupo de Suporte</a>
+
+                <a href="#" id="link-painel-chat">Painel de Chat</a>
+                <a href="#" id="link-conta">Conta</a>
+            </nav>
+            <div class="social-icons">
+                <a href="#description-modal" id="link-sobre-nos" class="icon-description"
+                    aria-label="Descrição/Sobre Nós"></a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="left-section">
+                <div class="card">
+                    <div class="card-image-bg"></div>
+                    <div class="card-content">
+                        <h1 class="card-title">Nazuna</h1>
+                        <p class="card-subtitle">Olá, viajante.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="right-section">
+                <h2>A melhor IA para te ajudar nos estudos!</h2>
+                <p>Bem vindo a Nazuna IA. A melhor I.A para te ajudar nos seus trabalhos, para interagir e gerar imagens
+                    para você!</p>
+
+                <div class="buttons-container">
+                    <button class="btn btn-primary" id="btn-conversar-agora">🚀 Conversar Agora</button>
+
+                    <div class="options-container hidden" id="options-container">
+
+                        <a href="https://wa.me/5511987211313?text=Olá%20Nazuna%2C%20gostaria%20de%20iniciar%20uma%20conversa"
+                            class="btn btn-tertiary" target="_blank">
+                            <span style="font-size: 1.2em; margin-right: 5px;">📱</span> Conversar Via WhatsApp
+                        </a>
+
+                        <button class="btn btn-primary" id="btn-chat-direto">💬 Conversar Diretamente (Site)</button>  
+                    </div>
+
+                    <a href="https://wa.me/554599941804?text=Olá%20Sanchez%2C%20gostaria%20de%20saber%20como%20usar%20a%20Nazuna%20da%20forma%20correta"
+                        class="btn btn-secondary" target="_blank"
+                        style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                        Suporte WhatsApp
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div id="chat-modal" class="chat-modal">
+        <div class="chat-content">
+            <span class="close-btn" id="close-chat-modal">&times;</span>
+            <h3 style="color: var(--accent-color); margin-bottom: 15px;">💬 Chat Nazuna IA (Interface Web)</h3>
+
+            <div class="chat-interface">
+                <div class="chat-display" id="chat-display">
+                    <p style="color: #aaa; font-size: 0.9em; text-align: center; padding-top: 10px;">
+                        Bem-vindo(a)! Digite sua primeira pergunta.
+                    </p>
+                </div>
+
+                <div class="chat-input-area">
+                    <textarea id="chat-input" placeholder="Digite sua mensagem aqui..."></textarea>
+                    <button id="send-btn">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="about-section" class="full-screen-section hidden">
+        <div class="header about-header">
+            <button id="btn-voltar-principal" class="btn btn-secondary btn-small">
+                <span style="font-size: 1.2em; margin-right: 5px;">&#x2190;</span> Voltar ao Principal
+            </button>
+        </div>
+
+        <div class="about-content">
+
+            <div class="about-left">
+                <div class="my-photo-bg"></div>
+                <h3 class="about-title">O Criador</h3>
+            </div>
+
+            <div class="about-right">
+                <h2>Desenvolvido por Sanchez Dev's</h2>
+
+                <p>
+                    Este projeto é o resultado da minha paixão por inteligência artificial e desenvolvimento web. A
+                    Nazuna IA foi criada para ser mais do que um chatbot genérico; ela é uma assistente focada em
+                    otimizar seus estudos e tarefas com um estilo único e envolvente.
+                </p>
+                <p>
+                    **Tecnologias Usadas:** Gemini API, Node.js (Express), HTML5, CSS3 e JavaScript.
+                </p>
+                <p>
+                    Fique à vontade para entrar em contato ou conferir meu trabalho:
+                </p>
+                <div class="about-social-links">
+                    <a href="#" target="_blank" class="btn btn-secondary">Meu GitHub</a>
+                    <a href="https://wa.me/554599941804" target="_blank" class="btn btn-tertiary">Meu WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="index-ia.js"></script>
+</body>
+
+</html>

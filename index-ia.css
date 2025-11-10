@@ -1,0 +1,627 @@
+/* Variáveis de Cores */
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #ff4500;
+    /* Laranja forte */
+    --soft-orange: #ff6a00;
+    --font-family: 'Poppins', sans-serif;
+    --intro-duration: 3s;
+    /* Duração da Intro antes de sumir */
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* -------------------- ANIMAÇÃO DE INTRODUÇÃO (NOVO) -------------------- */
+
+#page-intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    /* Garante que fique acima de tudo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    /* Transição suave ao sumir */
+}
+
+#page-intro.hidden {
+    opacity: 0;
+    pointer-events: none;
+    /* Impede cliques depois de sumir */
+}
+
+.intro-text {
+    color: var(--accent-color);
+    font-size: 3em;
+    font-weight: 700;
+    animation: pulse-glow 1.5s infinite alternate;
+    /* Efeito de brilho pulsante */
+}
+
+@keyframes pulse-glow {
+    from {
+        text-shadow: 0 0 5px var(--accent-color);
+    }
+
+    to {
+        text-shadow: 0 0 15px var(--soft-orange), 0 0 30px rgba(255, 69, 0, 0.5);
+    }
+}
+
+/* -------------------- PARTÍCULAS ANIMADAS -------------------- */
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Keyframes para as partículas subirem */
+@keyframes particle-up {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.particle {
+    position: absolute;
+    bottom: -100px;
+    opacity: 0;
+    animation-name: particle-up;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.bubble {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 165, 0, 0.6);
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 15px solid rgba(255, 69, 0, 0.7);
+}
+
+/* Gerando várias partículas com posições e atrasos diferentes */
+.particle:nth-child(1) {
+    left: 10%;
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    left: 30%;
+    animation-duration: 9s;
+    animation-delay: 1.5s;
+}
+
+.particle:nth-child(3) {
+    left: 55%;
+    animation-duration: 15s;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(4) {
+    left: 70%;
+    animation-duration: 8s;
+    animation-delay: 4.5s;
+}
+
+.particle:nth-child(5) {
+    left: 90%;
+    animation-duration: 11s;
+    animation-delay: 6s;
+}
+
+
+/* -------------------- CONTEÚDO PRINCIPAL (REVELAÇÃO) -------------------- */
+
+#main-content-wrapper {
+    opacity: 0;
+    /* Começa invisível */
+    transform: translateY(20px);
+    /* Começa um pouco abaixo para o efeito de subida */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    width: 100%;
+    /* Garante que o wrapper ocupe a tela */
+}
+
+#main-content-wrapper.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* -------------------- CABEÇALHO (HEADER) -------------------- */
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 20px 50px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--soft-orange);
+}
+
+.social-icons {
+    position: absolute;
+    right: 50px;
+    top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    text-decoration: none;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.social-icons a:hover {
+    background-color: var(--soft-orange);
+}
+
+.icon-whatsapp::after {
+    content: 'W';
+    color: var(--bg-color);
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* -------------------- LAYOUT PRINCIPAL (MAIN) -------------------- */
+.main-content {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 50px;
+}
+
+.left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 50px;
+}
+
+.right-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.right-section h2 {
+    font-size: 3em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.right-section p {
+    font-size: 1.1em;
+    color: #ccc;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+/* -------------------- CARTÃO (CARD) -------------------- */
+.card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-color: #111;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow:
+        0 0 15px rgba(255, 69, 0, 0.4),
+        0 0 40px rgba(255, 69, 0, 0.2);
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: transform 0.5s;
+}
+
+.card:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+.card-image-bg {
+    background-image: url('https://blackstorage.store/midia/1762169502067.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.9) contrast(1.1);
+    border-radius: 8px;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    text-align: left;
+}
+
+.card-title {
+    font-size: 2.5em;
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.card-subtitle {
+    font-size: 1em;
+    color: #aaa;
+}
+
+
+/* -------------------- BOTÕES -------------------- */
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Classes de Transição/Visibilidade */
+.hidden {
+    display: none !important;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.visible {
+    display: flex;
+    opacity: 1;
+}
+
+/* Estilo para o Container das Opções */
+.options-container {
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.6);
+}
+
+.btn-primary:hover {
+    background-color: var(--soft-orange);
+    box-shadow: 0 0 15px rgba(255, 106, 0, 0.8);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 69, 0, 0.1);
+    color: var(--text-color);
+}
+
+.btn-tertiary {
+    background-color: #25D366;
+    color: var(--bg-color);
+    border-color: #25D366;
+    padding: 15px 25px;
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.6);
+}
+
+.btn-tertiary:hover {
+    background-color: #128C7E;
+    border-color: #128C7E;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.8);
+}
+
+/* -------------------- CHAT MODAL -------------------- */
+.chat-modal {
+    display: none;
+    /* Começa oculto */
+    position: fixed;
+    z-index: 9990;
+    /* Abaixo do loader de intro, mas acima do conteúdo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-modal.visible {
+    display: flex;
+    /* Exibe o modal */
+}
+
+.chat-content {
+    background-color: #1a1a1a;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--accent-color);
+    width: 90%;
+    max-width: 600px;
+    height: 70vh;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-color);
+}
+
+.chat-interface {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-display {
+    flex-grow: 1;
+    background-color: #222;
+    border-radius: 5px;
+    padding: 15px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* Estilos para as mensagens no chat-display (opcional) */
+.user-message {
+    text-align: right;
+    color: #fff;
+    background-color: var(--accent-color);
+    padding: 8px 12px;
+    border-radius: 10px 10px 0 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+.ia-message {
+    text-align: left;
+    color: #fff;
+    background-color: #333;
+    padding: 8px 12px;
+    border-radius: 10px 10px 10px 0;
+    max-width: 80%;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-area textarea {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #333;
+    background-color: #222;
+    color: var(--text-color);
+    border-radius: 5px;
+    resize: none;
+    min-height: 40px;
+    font-family: var(--font-family);
+}
+
+.chat-input-area button {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.social-icons a {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    text-decoration: none;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.social-icons a:hover {
+    background-color: var(--soft-orange);
+}
+
+/* -------------------- NOVA SEÇÃO FULL SCREEN (SOBRE NÓS) -------------------- */
+.full-screen-section {
+    position: absolute;
+    /* Para ocupar o espaço do conteúdo principal */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Alinha o conteúdo mais ao topo */
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    padding-top: 50px;
+    /* Espaço para o header */
+}
+
+/* Garante que o conteúdo principal e a nova seção não apareçam ao mesmo tempo */
+.full-screen-section.hidden,
+#main-content-wrapper.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.about-header {
+    justify-content: flex-start;
+    /* Move o botão para a esquerda */
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 50px;
+}
+
+.about-content {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 50px;
+    padding: 50px;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.my-photo-bg {
+    /* Exemplo de URL. TROQUE POR SUA FOTO REAL */
+    background-image: url('https://blackstorage.store.midia/1762438581649.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid var(--accent-color);
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.about-title {
+    color: var(--soft-orange);
+    font-weight: 600;
+}
+
+.about-right {
+    flex: 2;
+    text-align: left;
+}
+
+.about-right h2 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    color: var(--text-color);
+}
+
+.about-right p {
+    font-size: 1.1em;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.about-social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
