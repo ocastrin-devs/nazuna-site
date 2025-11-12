@@ -244,9 +244,6 @@ window.addEventListener('click', (event) => {
         chatModal.classList.remove('visible');
     }
     // Adiciona o novo modal ao handler de fechar ao clicar fora
-    if (event.target === descriptionModal) { // <-- PRECISA SER REMOVIDO!
-        descriptionModal.classList.remove('visible'); // <-- PRECISA SER REMOVIDO!
-    }
 });
 // ----------------------------------------------------
 // REMOVIDO: A função 'conversarComNazuna' e 'memoriasNazunaWeb' foram movidas para o backend.
