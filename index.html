@@ -64,7 +64,7 @@
                             <span style="font-size: 1.2em; margin-right: 5px;">📱</span> Conversar Via WhatsApp
                         </a>
 
-                        <button class="btn btn-primary" id="btn-chat-direto">💬 Conversar Diretamente (Site)</button>  
+                        <button class="btn btn-primary" id="btn-chat-direto">💬 Conversar Diretamente</button>  
                     </div>
 
                     <a href="https://wa.me/554599941804?text=Olá%20Sanchez%2C%20gostaria%20de%20saber%20como%20usar%20a%20Nazuna%20da%20forma%20correta"
@@ -79,7 +79,7 @@
     <div id="chat-modal" class="chat-modal">
         <div class="chat-content">
             <span class="close-btn" id="close-chat-modal">&times;</span>
-            <h3 style="color: var(--accent-color); margin-bottom: 15px;">💬 Chat Nazuna IA (Interface Web)</h3>
+            <h3 style="color: var(--accent-color); margin-bottom: 15px;">💬 Chat Nazuna IA</h3>
 
             <div class="chat-interface">
                 <div class="chat-display" id="chat-display">
@@ -124,11 +124,45 @@
                     Fique à vontade para entrar em contato ou conferir meu trabalho:
                 </p>
                 <div class="about-social-links">
-                    <a href="#" target="_blank" class="btn btn-secondary">Meu GitHub</a>
+                    <a href="https://github.com/ocastrin-devs" target="_blank" class="btn btn-secondary">Meu GitHub</a>
                     <a href="https://wa.me/554599941804" target="_blank" class="btn btn-tertiary">Meu WhatsApp</a>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div id="account-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-account-modal">&times;</span>
+            <h3 style="color: var(--accent-color); margin-bottom: 20px;">👤 Minha Conta Nazuna (Memória da IA)</h3>
+
+            <div class="account-form">
+                <div class="form-group-image">
+                    <label for="profile-photo" class="photo-label">
+                        <input type="file" id="profile-photo" accept="image/*" style="display: none;">
+                        <span class="photo-placeholder-text">Adicionar Foto (Opcional)</span>
+                    </label>
+                    <p class="small-text-info">Esta foto será usada para identificação visual, mas a IA só memorizará o
+                        nome e a descrição.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-name">Seu Nome / Apelido:</label>
+                    <input type="text" id="user-name" placeholder="Ex: Viajante, Mestre, Sanchez Dev's" maxlength="50">
+                    <p class="small-text-info">O nome que a Nazuna usará para te chamar.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-description">Descrição Rápida (Máx. 250 palavras):</label>
+                    <textarea id="user-description" rows="5" maxlength="1500"
+                        placeholder="Ex: Sou estudante de Direito, gosto de animes e prefiro respostas objetivas."></textarea>
+                    <p class="small-text-info">O que você faz, gosta ou como você prefere interagir (para a IA te
+                        identificar melhor).</p>
+                </div>
+
+                <button class="btn btn-primary" id="save-account-btn">💾 Salvar Configurações</button>
+            </div>
         </div>
     </div>
 

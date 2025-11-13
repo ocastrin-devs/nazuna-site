@@ -625,3 +625,124 @@ body {
     padding: 8px 15px;
     font-size: 0.9em;
 }
+
+/* -------------------- ESTILOS GERAIS DE MODAL (Reutilizável para Conta) -------------------- */
+/* O chat-modal já usa a lógica, mas vamos criar uma classe genérica .modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9995;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.visible {
+    display: flex;
+}
+
+/* Reutilizando/Adaptando o estilo do chat-content */
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border: 1px solid var(--accent-color);
+    width: 90%;
+    max-width: 550px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------------------- ESTILOS DO FORMULÁRIO DE CONTA -------------------- */
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--soft-orange);
+    font-size: 1.1em;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #333;
+    background-color: #222;
+    color: var(--text-color);
+    border-radius: 5px;
+    resize: vertical;
+    font-family: var(--font-family);
+    font-size: 1em;
+}
+
+.form-group textarea {
+    min-height: 120px;
+}
+
+.form-group-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.photo-label {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #333;
+    border: 3px dashed var(--accent-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-label:hover {
+    background-color: #444;
+}
+
+.photo-label img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 5px;
+}
+
+.small-text-info {
+    font-size: 0.85em;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+#save-account-btn {
+    margin-top: 15px;
+}
