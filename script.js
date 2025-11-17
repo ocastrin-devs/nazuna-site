@@ -19,41 +19,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-btn');
     const chatDisplay = document.getElementById('chat-display');
 
-    // NOVOS ELEMENTOS NECESSÁRIOS PARA A TROCA DE TELA
+    // ELEMENTOS DE TROCA DE TELA
     const linkSobreNos = document.getElementById('link-sobre-nos'); // O link 'i' no header
-    const aboutSection = document.getElementById('about-section'); // A nova seção de descrição (do HTML)
-    const btnVoltarPrincipal = document.getElementById('btn-voltar-principal'); // O botão de voltar (do HTML)
+    const aboutSection = document.getElementById('about-section'); // A nova seção de descrição
+    const btnVoltarPrincipal = document.getElementById('btn-voltar-principal'); // O botão de voltar
+
+    // ----------------------------------------------------
+    // NOVO: Elementos do Modal de Conta
+    // ----------------------------------------------------
+    const linkConta = document.getElementById('link-conta');
+    const accountModal = document.getElementById('account-modal');
+    const closeAccountModal = document.getElementById('close-account-modal');
+    const userNameInput = document.getElementById('user-name');
+    const userDescriptionTextarea = document.getElementById('user-description');
+    const saveAccountBtn = document.getElementById('save-account-btn');
+
 
     // --- Lógica de Troca de Seções (Menu Principal <-> Descrição Pessoal) ---
 
-    // Função para mostrar a seção "Sobre Nós" e esconder o principal
+    // Função para mostrar a seção "Sobre Nós"
     const showAbout = (e) => {
         e.preventDefault();
-        // Esconde o conteúdo principal
         mainContentWrapper.classList.add('hidden');
-        // Mostra a nova seção
         aboutSection.classList.remove('hidden');
-        // Certifica que o modal de chat esteja fechado, se estiver aberto
         chatModal.classList.remove('visible');
+        accountModal.classList.remove('visible'); // Fecha modal de conta
     };
 
-    // Função para mostrar o menu principal e esconder "Sobre Nós"
+    // Função para mostrar o menu principal
     const showMain = (e) => {
         e.preventDefault();
-        // Esconde a seção "Sobre Nós"
         aboutSection.classList.add('hidden');
-        // Mostra o conteúdo principal
         mainContentWrapper.classList.remove('hidden');
     };
 
-    // Ação: Abrir a seção de descrição quando clicar no link 'i'
     linkSobreNos.addEventListener('click', showAbout);
-
-    // Ação: Voltar para a principal quando clicar no botão 'Voltar'
     btnVoltarPrincipal.addEventListener('click', showMain);
 
     // -------------------------
-    // Lógica da Animação de Intro (Esta seção agora será executada)
+    // Lógica da Animação de Intro
     // -------------------------
     setTimeout(() => {
         intro.classList.add('hidden');
@@ -65,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, introDuration);
 
     // -------------------------
-    // Lógica dos Botões e Modal
+    // Lógica dos Botões e Modal de CHAT
     // -------------------------
 
     // Ação: Botão Inicial (Expande as opções)
@@ -77,42 +81,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ação: Conversar Diretamente (Site - ABRE O MODAL)
     btnChatDireto.addEventListener('click', () => {
+        accountModal.classList.remove('visible'); // Garante que o modal de conta esteja fechado
         chatModal.classList.add('visible');
     });
 
-    // Ação: Fechar o modal clicando no X
+    // Ação: Fechar o modal de CHAT clicando no X
     closeChatModal.addEventListener('click', () => {
         chatModal.classList.remove('visible');
     });
 
-    // Ação: Fechar o modal clicando fora dele
-    window.addEventListener('click', (event) => {
-        if (event.target === chatModal) {
-            chatModal.classList.remove('visible');
-        }
-    });
+    // ----------------------------------------------------
+    // Lógica do Modal de Conta (Perfil/Memória)
+    // ----------------------------------------------------
 
-    // --- Lógica do Modal de Descrição ---
+    // Função para carregar os dados salvos do localStorage
+    const loadAccountData = () => {
+        const name = localStorage.getItem('nazunaUserName') || '';
+        const description = localStorage.getItem('nazunaUserDescription') || '';
+        userNameInput.value = name;
+        userDescriptionTextarea.value = description;
+    };
 
-    // Ação: Abrir o modal de descrição quando clicar no link 'i'
-    linkSobreNos.addEventListener('click', (e) => {
+    // Função para salvar os dados no localStorage
+    const saveAccountData = () => {
+        localStorage.setItem('nazunaUserName', userNameInput.value.trim());
+        localStorage.setItem('nazunaUserDescription', userDescriptionTextarea.value.trim());
+        alert('Configurações de conta salvas! A Nazuna agora tem sua memória.');
+        accountModal.classList.remove('visible');
+    };
+
+    // Ação: Abrir o Modal de Conta
+    linkConta.addEventListener('click', (e) => {
         e.preventDefault();
-        descriptionModal.classList.add('visible');
+        loadAccountData(); // Carrega antes de abrir
+
+        // Garante que os outros modals/seções estejam limpos
+        chatModal.classList.remove('visible');
+        aboutSection.classList.add('hidden');
+        mainContentWrapper.classList.remove('hidden');
+
+        accountModal.classList.add('visible');
     });
 
-    // Ação: Fechar o modal de descrição clicando no X
-    closeDescriptionModal.addEventListener('click', () => {
-        descriptionModal.classList.remove('visible');
+    // Ação: Fechar o Modal de Conta clicando no X
+    closeAccountModal.addEventListener('click', () => {
+        accountModal.classList.remove('visible');
     });
 
-    // Ação: Fechar o modal de descrição clicando fora (Adaptação da função window.addEventListener)
+    // Ação: Botão Salvar
+    saveAccountBtn.addEventListener('click', saveAccountData);
+
+    // ----------------------------------------------------
+    // Ação: Fechar Modals clicando fora
+    // ----------------------------------------------------
     window.addEventListener('click', (event) => {
         if (event.target === chatModal) {
             chatModal.classList.remove('visible');
         }
-        // Adiciona o novo modal ao handler de fechar ao clicar fora
-        if (event.target === descriptionModal) {
-            descriptionModal.classList.remove('visible');
+        if (event.target === accountModal) {
+            accountModal.classList.remove('visible');
         }
     });
 
@@ -134,22 +161,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Adiciona indicador de 'digitando'
         const iaDiv = document.createElement('div');
-        iaDiv.className = 'ia-message ia-typing'; // Você pode adicionar um CSS para isso
+        iaDiv.className = 'ia-message ia-typing';
         iaDiv.textContent = '🐍 Nazuna está refletindo...';
         chatDisplay.appendChild(iaDiv);
 
         // Rola para o final
         chatDisplay.scrollTop = chatDisplay.scrollHeight;
 
-        // Gera/pega o ID da sessão (para o Node.js manter a memória)
+        // Gera/pega o ID da sessão
         let sessionId = localStorage.getItem('nazunaSessionId');
         if (!sessionId) {
             sessionId = 'web-' + Date.now();
             localStorage.setItem('nazunaSessionId', sessionId);
         }
 
+        // NOVO: Pega os dados de perfil para enviar ao backend
+        const userProfile = {
+            name: localStorage.getItem('nazunaUserName') || '',
+            description: localStorage.getItem('nazunaUserDescription') || ''
+        };
+
         // **MUITO IMPORTANTE:** TROQUE ESTA URL PELA URL REAL DO SEU BACKEND
-        // Se estiver rodando localmente na porta 3000, mantenha:
         const backendUrl = 'http://localhost:3000/api/chat-nazuna';
 
         fetch(backendUrl, {
@@ -159,13 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({
                 mensagemUsuario: messageText,
-                sessaoId: sessionId
+                sessaoId: sessionId,
+                // NOVO: Envia os dados de perfil
+                perfilUsuario: userProfile
             })
         })
             .then(response => {
-                // Verifica se a resposta HTTP é OK
                 if (!response.ok) {
-                    // Lança um erro para ser pego pelo catch
                     throw new Error(`Erro HTTP: ${response.status}`);
                 }
                 return response.json();
@@ -178,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const iaResponseDiv = document.createElement('div');
                 iaResponseDiv.className = 'ia-message';
 
-                // Verifica se a resposta veio no formato esperado do backend
                 const respostaFinal = data.resposta || "Erro: Resposta vazia do backend. 🐍";
                 iaResponseDiv.textContent = respostaFinal;
 
@@ -191,10 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Erro no fetch:", error);
                 // 1. Remove o indicador e exibe a mensagem de erro
                 iaDiv.textContent = `Erro de conexão: Verifique se o Node.js está rodando. (${error.message})`;
-                iaDiv.classList.add('error'); // Você pode adicionar um estilo CSS para 'error'
+                iaDiv.classList.add('error');
                 iaDiv.classList.remove('ia-typing');
 
-                // Garante que a rolagem vá para o final para mostrar o erro
                 chatDisplay.scrollTop = chatDisplay.scrollHeight;
             });
     };
@@ -209,20 +239,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Outros Handlers ---
+    // ... (após a declaração de todos os elementos) ...
 
-    // --- Outros Handlers (Mantidos) ---
+    // ELEMENTOS DA NOVA SIDEBAR
     const linkPainelChat = document.getElementById('link-painel-chat');
-    const linkConta = document.getElementById('link-conta');
+    const chatSidebar = document.getElementById('chat-sidebar');
+    const closeChatSidebar = document.getElementById('close-chat-sidebar');
+
+    // Função para abrir a aba lateral
+    const openSidebar = (e) => {
+        e.preventDefault();
+        // Garante que o modal de chat e o de conta estejam fechados
+        chatModal.classList.remove('visible');
+        accountModal.classList.remove('visible');
+        // Abre a sidebar
+        chatSidebar.classList.add('open');
+    };
+
+    // Função para fechar a aba lateral
+    const closeSidebar = () => {
+        chatSidebar.classList.remove('open');
+    };
+
+    // Ação: Abrir a aba lateral quando clicar no link "Painel de Chat"
+    linkPainelChat.addEventListener('click', openSidebar);
+
+    // Ação: Fechar a aba lateral quando clicar no 'X'
+    closeChatSidebar.addEventListener('click', closeSidebar);
+
+    // Ação: Fechar a aba lateral clicando fora (melhora a usabilidade)
+    window.addEventListener('click', (event) => {
+        if (event.target === chatSidebar) {
+            closeSidebar();
+        }
+        if (event.target === chatModal) {
+            chatModal.classList.remove('visible');
+        }
+        if (event.target === accountModal) {
+            accountModal.classList.remove('visible');
+        }
+    });
+
+// ... (Resto do seu script) ...
 
     linkPainelChat.addEventListener('click', (e) => {
         e.preventDefault();
         alert('Redirecionando para o Painel de Chat (Histórico)...');
     });
 
-    linkConta.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Abrindo modal/página de Configurações de Conta...');
-    });
+});
+
+
+// --- Outros Handlers (Mantidos) ---
+const linkConta = document.getElementById('link-conta');
+
+linkPainelChat.addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('Redirecionando para o Painel de Chat (Histórico)...');
+});
+
+linkConta.addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('Abrindo modal/página de Configurações de Conta...');
 });
 
 // --- Lógica do Modal de Descrição ---

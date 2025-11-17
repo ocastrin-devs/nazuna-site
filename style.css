@@ -746,3 +746,65 @@ body {
 #save-account-btn {
     margin-top: 15px;
 }
+
+/* -------------------- NOVA ABA LATERAL (SIDEBAR) -------------------- */
+
+.sidebar {
+    height: 100%;
+    width: 0; /* Largura inicial zero (oculta) */
+    position: fixed;
+    z-index: 9998; /* Fica acima de tudo, mas abaixo do loader intro */
+    top: 0;
+    right: 0;
+    background-color: #111; /* Cor de fundo escura, um pouco diferente do fundo principal */
+    overflow-x: hidden;
+    transition: 0.5s; /* Efeito de deslize suave */
+    padding-top: 60px;
+    border-left: 2px solid var(--accent-color);
+}
+
+.sidebar.open {
+    width: 300px; /* Largura aberta (ajuste conforme necessário) */
+}
+
+/* Em telas menores, pode ocupar mais espaço */
+@media screen and (max-width: 768px) {
+    .sidebar.open {
+        width: 80%;
+    }
+}
+
+.sidebar-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.close-sidebar-btn {
+    font-size: 36px;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.close-sidebar-btn:hover {
+    color: var(--soft-orange);
+}
+
+.sidebar-content {
+    padding: 20px 25px;
+    color: #ccc;
+}
+
+.history-placeholder {
+    font-style: italic;
+    color: #888;
+    margin-bottom: 10px;
+}
