@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // **MUITO IMPORTANTE:** TROQUE ESTA URL PELA URL REAL DO SEU BACKEND
-        const backendUrl = 'http://localhost:3000/api/chat-nazuna';
+        const backendUrl = 'https://br2.bronxyshost.com:4175/api/chat-nazuna';
 
         fetch(backendUrl, {
             method: 'POST',
